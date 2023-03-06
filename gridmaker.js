@@ -22,24 +22,67 @@ function Grid(args = {}) {
         this.getButton('add-row').addEventListener('click', function() {
             _this.addRow();
         });
+
+        this.getButton('add-column').addEventListener('click', function() {
+            _this.addCol();
+        });
+    }
+
+    this.getCell = function(row = 1, col = 1) {
+        return this.element.querySelector(`#cell-${row}-${col}`);
+    }
+
+    this.createCell = function(row = 1, col = 1) {
+        const cellElement = document.createElement('td');
+        cellElement.setAttribute('id', `cell-${row}-${col}`);
+        cellElement.innerHTML = `Cell ${row}-${col}`;
+        return cellElement;
+    }
+
+    this.addCell = function(row = 1, col = 1) {
+        this.getRow(row).appendChild(this.createCell(row, col));
+    }
+
+    this.getRow = function(row = 1) {
+        return this.element.querySelector(`#row-${row}`);
+    }
+
+    this.createRow = function(row = 1) {
+        const rowElement = document.createElement('tr');
+        rowElement.setAttribute('id', `row-${row}`);
+        return rowElement;
     }
 
     this.addRow = function() {
         this.rowCount++;
-        console.log('add row!', this.rowCount);
 
-        const row = document.createElement('tr');
-        row.setAttribute('id', `row-${this.rowCount}`);
+        // Add a new row to the table.
+        this.element.appendChild(this.createRow(this.rowCount));
 
-        // to become a function (addCol)
-        for (let i = 1; i <= this.colCount; i++) {
-            const cell = document.createElement('td');
-            cell.setAttribute('id', `cell-${this.rowCount}-${i}`);
-            cell.innerHTML = `Cell ${this.rowCount}-${i}`;
-            row.appendChild(cell);
+        // If there are no columns, add at least one.
+        if (this.colCount === 0) {
+            this.colCount++;
         }
 
-        this.element.appendChild(row);
+        // Add cells to the new row (one for each column).
+        for (let i = 1; i <= this.colCount; i++) {
+            this.addCell(this.rowCount, i);
+        }
+    }
+
+    this.addCol = function(row = 1) {
+        // If there are no rows, add one.
+        if (this.rowCount === 0) {
+            this.addRow();
+            return;
+        }
+
+        this.colCount++;
+
+        // Add a new cell to each row.
+        for (let i = 1; i <= this.rowCount; i++) {
+            this.addCell(i, this.colCount);
+        }
     }
 
     // Self-init.
@@ -50,7 +93,7 @@ function Grid(args = {}) {
 const grid = new Grid({
     element: '#grid',
     buttons: '#buttons',
-    colCount: 1,
+    colCount: 0,
     rowCount: 0
 });
 
