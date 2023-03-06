@@ -26,6 +26,10 @@ function Grid(args = {}) {
         this.getButton('add-column').addEventListener('click', function() {
             _this.addCol();
         });
+
+        this.getButton('remove-row').addEventListener('click', function() {
+            _this.removeRow();
+        });
     }
 
     this.getCell = function(row = 1, col = 1) {
@@ -83,6 +87,19 @@ function Grid(args = {}) {
         for (let i = 1; i <= this.rowCount; i++) {
             this.addCell(i, this.colCount);
         }
+    }
+
+    this.removeRow = function(row = -1) {
+        if (this.rowCount === 0) {
+            return;
+        }
+
+        if (row === -1) {
+            row = this.rowCount;
+        }
+
+        this.element.removeChild(this.getRow(row));
+        this.rowCount--;
     }
 
     // Self-init.
