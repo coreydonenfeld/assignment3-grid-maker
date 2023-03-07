@@ -30,6 +30,10 @@ function Grid(args = {}) {
         this.getButton('remove-row').addEventListener('click', function() {
             _this.removeRow();
         });
+
+        this.getButton('remove-column').addEventListener('click', function() {
+            _this.removeCol();
+        });
     }
 
     this.getCell = function(row = 1, col = 1) {
@@ -102,6 +106,25 @@ function Grid(args = {}) {
 
         this.element.removeChild(this.getRow(row));
         this.rowCount--;
+    }
+
+    this.removeCol = function(col = -1) {
+        // If there are no columns, do nothing.
+        if (this.colCount === 0) {
+            return;
+        }
+
+        // Default to removing the last column.
+        if (col === -1) {
+            col = this.colCount;
+        }
+
+        // Remove the cell from each row.
+        for (let i = 1; i <= this.rowCount; i++) {
+            this.getRow(i).removeChild(this.getCell(i, col));
+        }
+
+        this.colCount--;
     }
 
     // Self-init.
