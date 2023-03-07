@@ -43,7 +43,11 @@ function Grid(args = {}) {
         });
 
         this.getButton('fill-all-uncolored').addEventListener('click', function() {
-            _this.fillAllUncolored();
+            _this.fillCells('uncolored');
+        });
+
+        this.getButton('fill-all').addEventListener('click', function() {
+            _this.fillCells();
         });
 
         this.element.addEventListener('click', function(e) {
@@ -156,6 +160,16 @@ function Grid(args = {}) {
         }
 
         this.colCount--;
+    }
+
+    this.fillCells = function(type = 'all') {
+        for (let r = 1; r <= this.rowCount; r++) {
+            for (let c = 1; c <= this.colCount; c++) {
+                if (type == 'all' || (type == 'uncolored' && (this.getCellColor(r, c) === '' || this.getCellColor(r, c) == 'rgb(255, 255, 255)'))) {
+                    this.setCellColor(r, c, this.color);
+                }
+            }
+        }
     }
 
     this.fillAllUncolored = function() {
