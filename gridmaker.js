@@ -6,12 +6,14 @@ function Grid(args = {}) {
     this.buttons;
     this.colCount = 0;
     this.rowCount = 0;
+    this.cellColor = '#FFF';
 
     this.init = function(args) {
         this.element = document.querySelector(args.element);        
         this.buttons = document.querySelector(args.buttons);        
         this.colCount = args.colCount;
         this.rowCount = args.rowCount;
+        this.cellColor = args.cellColor || '#FFF';
         this.listeners();
     }
 
@@ -38,6 +40,18 @@ function Grid(args = {}) {
         this.getButton('remove-column').addEventListener('click', function() {
             _this.removeCol();
             _this.displayCounts();
+        });
+
+        this.getButton('color').addEventListener('change', function(e) {
+            _this.color = e.target.value;
+        });
+
+        this.element.addEventListener('click', function(e) {
+            const cell = e.target;
+            const cellID = cell.getAttribute('id');
+            const row = cellID.split('-')[1];
+            const col = cellID.split('-')[2];
+            _this.colorCell(row, col, _this.color);
         });
     }
 
@@ -132,7 +146,9 @@ function Grid(args = {}) {
         this.colCount--;
     }
 
-
+    this.colorCell = function(row = 1, col = 1, color = '#FFF') {
+        this.getCell(row, col).style.backgroundColor = color;
+    }
 
     this.displayCounts = function() {
         this.getButton('row-count').innerHTML = this.rowCount;

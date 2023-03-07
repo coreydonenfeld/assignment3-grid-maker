@@ -261,17 +261,17 @@ header nav ul li p {
 }
 
 header nav ul li .btn.primary[for="select-color"] {
-	display: inline-flex;
 	align-items: center;
-	height: 38px;
 	background: transparent;
-	color: var(--black);
 	border: 2px solid var(--black);
+	color: var(--black);
+	display: inline-flex;
+	height: 38px;
 }
 
 header nav ul li [for="select-color"] input {
-	border: none;
 	background: transparent;
+	border: none;
 	width: 20px;
 }
 
@@ -291,16 +291,23 @@ header nav ul li [for="select-color"] input {
 }
 
 #grid tr td {
+	background: var(--white);
     border: 2px solid var(--rose-quartz);
 	font-family: var(--body-font-alt);
-    height: 100px;
-	text-align: center;
-	vertical-align: middle;
 	font-size: calc(12rem / 16);
-	text-transform: uppercase;
-	letter-spacing: 1.5px;
 	font-weight: 500;
+    height: 100px;
+	letter-spacing: 1.5px;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	vertical-align: middle;
     width: 100px;
+}
+
+#grid tr td:hover {
+	box-shadow: 0 0 0 2px inset var(--rose-quartz);
+	z-index: 1;
 }
 
 /***************************************************************************************************************************************************************************************/
