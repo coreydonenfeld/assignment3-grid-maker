@@ -248,12 +248,14 @@ header {
 	z-index: 999;
 }
 
-header .flex {
-	align-items: center;
+header nav.flex {
+	justify-content: space-between;
 }
 
-header nav ul li + li {
-	margin-left: 10px;
+header .flex {
+	align-items: center;
+	justify-content: flex-start;
+	gap: 10px;
 }
 
 header nav ul li p {
