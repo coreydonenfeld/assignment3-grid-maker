@@ -1,6 +1,7 @@
 function Grid(args = {}) {
     const _this = this;
     
+    // Properties.
     this.element;
     this.buttons;
     this.colCount = 0;
@@ -21,18 +22,22 @@ function Grid(args = {}) {
     this.listeners = function() {
         this.getButton('add-row').addEventListener('click', function() {
             _this.addRow();
+            _this.displayCounts();
         });
 
         this.getButton('add-column').addEventListener('click', function() {
             _this.addCol();
+            _this.displayCounts();
         });
 
         this.getButton('remove-row').addEventListener('click', function() {
             _this.removeRow();
+            _this.displayCounts();
         });
 
         this.getButton('remove-column').addEventListener('click', function() {
             _this.removeCol();
+            _this.displayCounts();
         });
     }
 
@@ -125,6 +130,14 @@ function Grid(args = {}) {
         }
 
         this.colCount--;
+    }
+
+
+
+    this.displayCounts = function() {
+        this.getButton('row-count').innerHTML = this.rowCount;
+        this.getButton('col-count').innerHTML = this.colCount;
+        this.getButton('cell-count').innerHTML = this.rowCount * this.colCount;
     }
 
     // Self-init.
