@@ -248,19 +248,21 @@ header {
 	z-index: 999;
 }
 
-header .flex {
-	align-items: center;
+header nav.flex {
+	justify-content: space-between;
 }
 
-header nav ul li + li {
-	margin-left: 10px;
+header .flex {
+	align-items: center;
+	justify-content: flex-start;
+	gap: 10px;
 }
 
 header nav ul li p {
 	margin: 0;
 }
 
-header nav ul li .btn.primary[for="select-color"] {
+header nav ul li .btn.primary[for="color"] {
 	align-items: center;
 	background: transparent;
 	border: 2px solid var(--black);
@@ -269,7 +271,7 @@ header nav ul li .btn.primary[for="select-color"] {
 	height: 38px;
 }
 
-header nav ul li [for="select-color"] input {
+header nav ul li [for="color"] input {
 	background: transparent;
 	border: none;
 	width: 20px;
@@ -292,21 +294,22 @@ header nav ul li [for="select-color"] input {
 
 #grid tr td {
 	background: var(--white);
-    border: 2px solid var(--rose-quartz);
+    border: 1px solid var(--rose-quartz);
 	font-family: var(--body-font-alt);
 	font-size: calc(12rem / 16);
+	font-size: 0px;
 	font-weight: 500;
-    height: 100px;
+    height: 50px;
 	letter-spacing: 1.5px;
 	position: relative;
 	text-align: center;
 	text-transform: uppercase;
 	vertical-align: middle;
-    width: 100px;
+    width: 50px;
 }
 
 #grid tr td:hover {
-	box-shadow: 0 0 0 2px inset var(--rose-quartz);
+	box-shadow: 0 0 0 1px inset var(--rose-quartz);
 	z-index: 1;
 }
 
