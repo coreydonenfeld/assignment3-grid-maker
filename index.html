@@ -36,9 +36,24 @@
                     <li>
                         <button class="btn primary" id="clear-all">Clear All</button>
                     </li>
+                </ul>
+                <ul class="flex">
+                    <li>
+                        <label for="select-width">Width</label>
+                        <input type="number" id="select-width" name="select-width" min="1" max="100" value="1">
+                    </li>
+                    <li>
+                        <label for="select-height">Height</label>
+                        <input type="number" id="select-height" name="select-height" min="1" max="100" value="1">
+                    </li>
                     <li>
                         <label for="select-color">Color</label>
                         <input type="color" id="select-color" name="select-color" value="#e66465">
+                    </li>
+                    <li>
+                        <p><span id="cell-count">0</span> cells</p>
+                        <p><span id="row-count">0</span> rows</p>
+                        <p><span id="col-count">0</span> columns</p>
                     </li>
                 </ul>
             </nav>
