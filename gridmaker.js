@@ -42,6 +42,10 @@ function Grid(args = {}) {
             _this.displayCounts();
         });
 
+        this.getButton('color').addEventListener('change', function(e) {
+            _this.color = e.target.value;
+        });
+
         this.element.addEventListener('click', function(e) {
             const cell = e.target;
             const cellID = cell.getAttribute('id');
