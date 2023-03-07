@@ -14,25 +14,18 @@
 
 :root {
   	--white: #fff;
-  	--oxford-blue: #10102a;
-	--blue-gray: #494953;
-	--space-cadet: #1F1F4E;
-	--indigo-dye: #0A4675;
-	--bice-blue: #006AA3;
-	--carolina-blue: #7abadb;
-	--columbia-blue: #b7dced;
-	--honey-dew: #f4fff4;
-	--fern-green: #50723c;
-	--tea-green: #C2EBA9;
-	--nyanza: #e5f9e0;
-	--hunyadi-yellow: #f6ae2d;
+	--black: #08090a;
+	--rose-quartz: #a7a2a9;
+	--seasalt: #f4f7f5;
+	--davys-gray: #575a5e;
+	--eerie-black: #222823;
   	--body-font: "pragmatica", sans-serif;
 	--body-font-alt: "pragmatica-extended", sans-serif;
 	--heading-font: "p22-mackinac-pro", serif;
-	--container-width: 90vw;
-	--container-max-width: 1600px;
-	--container-outer-padding: 50px;
-	--container-outer-margin: calc((100vw - var(--container-width)) / 2);
+	--container-width: 100%;
+	--container-max-width: 100%;
+	--container-outer-padding: 20px;
+	--container-outer-margin: 0px;
 	--viewport-edge: calc((var(--container-outer-margin) + var(--container-outer-padding)) * -1);
 	--gap: 40px;
 	--grid: repeat(12, 1fr);
@@ -43,11 +36,13 @@ html {
 }
 
 body { 
-	background: var(--honey-dew);
-	color: var(--oxford-blue);
+	background: var(--seasalt);
+	border: 10px solid var(--rose-quartz);
+	color: var(--black);
 	font: 1rem var(--body-font);
 	-moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
+	min-height: 100vh;
 }
 
 a { 
@@ -184,9 +179,10 @@ article {
 /*Primary*/
 
 .btn.primary {
-    background: var(--bice-blue);
+    background: var(--eerie-black);
     border: 1px solid var(--bice-blue);
-    color: var(--honey-dew);
+    color: var(--white);
+	padding: 10px 16px;
 }
 
 /*Fancy Underline*/
@@ -245,7 +241,10 @@ article {
 /***************************************************************************************************************************************************************************************/
 
 header {
-	padding: 30px 0;
+	background: var(--seasalt);
+	padding: 20px 0;
+	position: sticky;
+	top: 0;
 	z-index: 999;
 }
 
@@ -254,43 +253,26 @@ header .flex {
 }
 
 header nav ul li + li {
-	margin-left: 40px;
+	margin-left: 10px;
 }
 
-header nav ul li .btn.underline-fancy {
-	font-size: calc(14rem / 16);
-	font-weight: 500;
-	letter-spacing: .2px;
-	text-transform: none;
-	--color: var(--space-cadet);
+header nav ul li p {
+	margin: 0;
 }
 
-header nav ul li a.btn.active {
-	--color: var(--bice-blue);
+header nav ul li .btn.primary[for="select-color"] {
+	display: inline-flex;
+	align-items: center;
+	height: 38px;
+	background: transparent;
+	color: var(--black);
+	border: 2px solid var(--black);
 }
 
-header nav ul li a.btn.active:hover::before {
-	left: 0;
-	right: auto;
-	width: 100%;
-}
-
-/*Light*/
-
-header.light .logo {
-	color: var(--white);
-}
-
-header.light .logo:hover {
-	color: var(--honey-dew);
-}
-
-header.light nav ul li .btn.underline-fancy {
-	--color: var(--honey-dew);
-}
-
-header.light nav ul li .btn.underline-fancy.active {
-	--color: var(--columbia-blue);
+header nav ul li [for="select-color"] input {
+	border: none;
+	background: transparent;
+	width: 20px;
 }
 
 /***************************************************************************************************************************************************************************************/
@@ -299,15 +281,26 @@ header.light nav ul li .btn.underline-fancy.active {
 
 /***************************************************************************************************************************************************************************************/
 
+.grid-maker {
+	padding: 0 0 20px;
+}
+
 #grid {
-    /* width: 100%; */
+	max-width: 100%;
+	overflow-x: auto;
 }
 
 #grid tr td {
-    border: 1px solid var(--bice-blue);
-    width: 50px;
-    height: 50px;
-
+    border: 2px solid var(--rose-quartz);
+	font-family: var(--body-font-alt);
+    height: 100px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: calc(12rem / 16);
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	font-weight: 500;
+    width: 100px;
 }
 
 /***************************************************************************************************************************************************************************************/
