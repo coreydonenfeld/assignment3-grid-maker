@@ -90,10 +90,12 @@ function Grid(args = {}) {
     }
 
     this.removeRow = function(row = -1) {
+        // If there are no rows, do nothing.
         if (this.rowCount === 0) {
             return;
         }
 
+        // Default to removing the last row.
         if (row === -1) {
             row = this.rowCount;
         }
