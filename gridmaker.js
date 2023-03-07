@@ -50,6 +50,10 @@ function Grid(args = {}) {
             _this.fillCells();
         });
 
+        this.getButton('clear-all').addEventListener('click', function() {
+            _this.clearCells();
+        })
+
         this.element.addEventListener('click', function(e) {
             const cell = e.target;
             const cellID = cell.getAttribute('id');
@@ -84,6 +88,10 @@ function Grid(args = {}) {
 
     this.getCellColor = function(row = 1, col = 1) {
         return this.getCell(row, col).style.backgroundColor;
+    }
+
+    this.clearCellColor = function(row = 1, col = 1) {
+        this.getCell(row, col).style.backgroundColor = '';
     }
 
     this.getRow = function(row = 1) {
@@ -172,16 +180,13 @@ function Grid(args = {}) {
         }
     }
 
-    this.fillAllUncolored = function() {
+    this.clearCells = function() {
         for (let r = 1; r <= this.rowCount; r++) {
             for (let c = 1; c <= this.colCount; c++) {
-                if (this.getCellColor(r, c) === '' || this.getCellColor(r, c) == 'rgb(255, 255, 255)') {
-                    this.setCellColor(r, c, this.color);
-                }
+                this.clearCellColor(r, c);
             }
         }
     }
-
 
     this.displayCounts = function() {
         this.getButton('row-count').innerHTML = this.rowCount;
