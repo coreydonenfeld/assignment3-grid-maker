@@ -42,6 +42,10 @@ function Grid(args = {}) {
             _this.color = e.target.value;
         });
 
+        this.getButton('fill-all-uncolored').addEventListener('click', function() {
+            _this.fillAllUncolored();
+        });
+
         this.element.addEventListener('click', function(e) {
             const cell = e.target;
             const cellID = cell.getAttribute('id');
@@ -153,6 +157,17 @@ function Grid(args = {}) {
 
         this.colCount--;
     }
+
+    this.fillAllUncolored = function() {
+        for (let r = 1; r <= this.rowCount; r++) {
+            for (let c = 1; c <= this.colCount; c++) {
+                if (this.getCellColor(r, c) === '' || this.getCellColor(r, c) == 'rgb(255, 255, 255)') {
+                    this.setCellColor(r, c, this.color);
+                }
+            }
+        }
+    }
+
 
     this.displayCounts = function() {
         this.getButton('row-count').innerHTML = this.rowCount;
