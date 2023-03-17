@@ -181,28 +181,64 @@ function GridMaker(args = {}) {
         this.getRow(row).appendChild(this.createCell(row, col));
     }
 
+    /**
+     * Set the color of a cell.
+     * 
+     * @param {Number} row The row number.
+     * @param {Number} col The column number.
+     * @param {String} color The color hex code.
+     */
     this.setCellColor = function(row = 1, col = 1, color = '#FFF') {
         this.getCell(row, col).style.backgroundColor = color;
     }
 
+    /**
+     * Get the color of a cell.
+     * 
+     * @param {Number} row The row number.
+     * @param {Number} col The column number.
+     * @returns {String} The color hex code.
+     */
     this.getCellColor = function(row = 1, col = 1) {
         return this.getCell(row, col).style.backgroundColor;
     }
 
+    /**
+     * Clear the color of a cell.
+     * 
+     * @param {Number} row The row number.
+     * @param {Number} col The column number.
+     * @returns void
+     */
     this.clearCellColor = function(row = 1, col = 1) {
         this.getCell(row, col).style.backgroundColor = '';
     }
 
+    /**
+     * Get a row.
+     * 
+     * @param {Number} row The row number.
+     * @returns {HTMLElement|null} The row element or null if not found.
+     */
     this.getRow = function(row = 1) {
         return this.element.querySelector(`#row-${row}`);
     }
 
+    /**
+     * Create a row element.
+     * 
+     * @param {Number} row The row number.
+     * @returns {HTMLElement} The row element.
+     */
     this.createRow = function(row = 1) {
         const rowElement = document.createElement('tr');
         rowElement.setAttribute('id', `row-${row}`);
         return rowElement;
     }
 
+    /**
+     * Add a row to the table.
+     */
     this.addRow = function() {
         this.rowCount++;
 
@@ -220,6 +256,12 @@ function GridMaker(args = {}) {
         }
     }
 
+    /**
+     * Add a column to the table.
+     * 
+     * @param {Number} row The row number. Default is 1.
+     * @returns null
+     */
     this.addCol = function(row = 1) {
         // If there are no rows, add one.
         if (this.rowCount === 0) {
@@ -235,6 +277,12 @@ function GridMaker(args = {}) {
         }
     }
 
+    /**
+     * Remove a row from the table.
+     * 
+     * @param {Number} row The row number. Default is the last row.
+     * @returns null
+     */
     this.removeRow = function(row = -1) {
         // If there are no rows, do nothing.
         if (this.rowCount === 0) {
@@ -256,6 +304,12 @@ function GridMaker(args = {}) {
         }
     }
 
+    /**
+     * Remove a column from the table.
+     * 
+     * @param {Number} col The column number. Default is the last column.
+     * @returns null
+     */
     this.removeCol = function(col = -1) {
         // If there are no columns, do nothing.
         if (this.colCount === 0) {
@@ -280,6 +334,11 @@ function GridMaker(args = {}) {
         }
     }
 
+    /**
+     * Fill all cells with the current color.
+     * 
+     * @param {String} type The type of cells to fill. Default is 'all'. Options are 'all' and 'uncolored'.
+     */
     this.fillCells = function(type = 'all') {
         for (let r = 1; r <= this.rowCount; r++) {
             for (let c = 1; c <= this.colCount; c++) {
@@ -290,6 +349,9 @@ function GridMaker(args = {}) {
         }
     }
 
+    /**
+     * Clear all cell colors.
+     */
     this.clearCells = function() {
         for (let r = 1; r <= this.rowCount; r++) {
             for (let c = 1; c <= this.colCount; c++) {
@@ -298,6 +360,9 @@ function GridMaker(args = {}) {
         }
     }
 
+    /**
+     * Display the current row, column, and cell counts.
+     */
     this.displayCounts = function() {
         this.getButton('row-count').innerHTML = this.rowCount;
         this.getButton('col-count').innerHTML = this.colCount;
