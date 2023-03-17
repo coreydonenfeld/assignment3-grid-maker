@@ -17,10 +17,23 @@ function GridMaker(args = {}) {
     this.rowCount = 0;
     this.cellColor = '#FFF';
 
+    /**
+     * Init.
+     * 
+     * @param {*} args The arguments.
+     * @param {string} args.element The selector of the table element.
+     * @param {string} args.buttons The selector of the buttons element.
+     * @param {number} args.colCount The number of initial columns.
+     * @param {number} args.rowCount The number of initial rows.
+     * @param {string} args.cellColor The color of the cells.
+     * @return void
+     */
     this.init = function(args) {
         this.element = document.querySelector(args.element);        
         this.buttons = document.querySelector(args.buttons);        
         this.cellColor = args.cellColor || '#FFF';
+
+        // Add initial rows and columns.
         if (args.rowCount > 0) {
             for (let r = 1; r <= args.rowCount; r++) {
                 this.addRow();
@@ -32,47 +45,83 @@ function GridMaker(args = {}) {
                 this.addCol();
             }
         }
+
+        // Display the initial counts.
         this.displayCounts();
+
+        // Add event listeners.
         this.listeners();
     }
 
+    /**
+     * Listeners.
+     * 
+     * @return void
+     */
     this.listeners = function() {
+        /**
+         * Add a row.
+         */
         this.getButton('add-row').addEventListener('click', function() {
             _this.addRow();
             _this.displayCounts();
         });
 
+        /**
+         * Add a column.
+         */
         this.getButton('add-column').addEventListener('click', function() {
             _this.addCol();
             _this.displayCounts();
         });
 
+        /**
+         * Remove a row.
+         */
         this.getButton('remove-row').addEventListener('click', function() {
             _this.removeRow();
             _this.displayCounts();
         });
 
+        /**
+         * Remove a column.
+         */
         this.getButton('remove-column').addEventListener('click', function() {
             _this.removeCol();
             _this.displayCounts();
         });
 
+        /**
+         * Update the color.
+         */
         this.getButton('color').addEventListener('change', function(e) {
             _this.color = e.target.value;
         });
 
+        /**
+         * Fill all uncolored cells.
+         */
         this.getButton('fill-all-uncolored').addEventListener('click', function() {
             _this.fillCells('uncolored');
         });
 
+        /**
+         * Fill all cells.
+         */
         this.getButton('fill-all').addEventListener('click', function() {
             _this.fillCells();
         });
 
+        /**
+         * Clear all cells.
+         */
         this.getButton('clear-all').addEventListener('click', function() {
             _this.clearCells();
         })
 
+        /**
+         * Color an individual cell.
+         */
         this.element.addEventListener('click', function(e) {
             const cell = e.target;
             const cellID = cell.getAttribute('id');
@@ -82,14 +131,34 @@ function GridMaker(args = {}) {
         });
     }
 
+    /**
+     * Get a button.
+     * 
+     * @param {string} button The button ID (without the #).
+     * @return {HTMLElement} The button element.
+     */
     this.getButton = function(button = '') {
         return this.buttons.querySelector(`#${button}`);
     }
 
+    /**
+     * Get a cell.
+     * 
+     * @param {Number} row The row number.
+     * @param {Number} col The column number.
+     * @returns {HTMLElement|null} The cell element or null if not found.
+     */
     this.getCell = function(row = 1, col = 1) {
         return this.element.querySelector(`#cell-${row}-${col}`);
     }
 
+    /**
+     * Create a cell element.
+     * 
+     * @param {Number} row The row number.
+     * @param {Number} col The column number.
+     * @returns {HTMLElement} The cell element.
+     */
     this.createCell = function(row = 1, col = 1) {
         const cellElement = document.createElement('td');
         cellElement.setAttribute('id', `cell-${row}-${col}`);
@@ -97,6 +166,13 @@ function GridMaker(args = {}) {
         return cellElement;
     }
 
+    /**
+     * Add a cell to the table.
+     * 
+     * @param {Number} row The row number.
+     * @param {Number} col The column number.
+     * @returns void
+     */
     this.addCell = function(row = 1, col = 1) {
         if (this.getCell(row, col)) {
             return;
@@ -239,5 +315,3 @@ const grid = new GridMaker({
     colCount: 0,
     rowCount: 0
 });
-
-console.log(grid);
