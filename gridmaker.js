@@ -1,4 +1,13 @@
-function Grid(args = {}) {
+/**
+ * Grid Maker.
+ * 
+ * @param {*} args The arguments.
+ * @param {string} args.element The selector of the table element.
+ * @param {string} args.buttons The selector of the buttons element.
+ * @param {number} args.colCount The number of initial columns.
+ * @param {number} args.rowCount The number of initial rows.
+ */
+function GridMaker(args = {}) {
     const _this = this;
     
     // Properties.
@@ -11,9 +20,19 @@ function Grid(args = {}) {
     this.init = function(args) {
         this.element = document.querySelector(args.element);        
         this.buttons = document.querySelector(args.buttons);        
-        this.colCount = args.colCount;
-        this.rowCount = args.rowCount;
         this.cellColor = args.cellColor || '#FFF';
+        if (args.rowCount > 0) {
+            for (let r = 1; r <= args.rowCount; r++) {
+                this.addRow();
+            }
+        }
+        if (args.colCount > 0) {
+            this.colCount = 0;
+            for (let c = 1; c <= args.colCount; c++) {
+                this.addCol();
+            }
+        }
+        this.displayCounts();
         this.listeners();
     }
 
@@ -79,6 +98,10 @@ function Grid(args = {}) {
     }
 
     this.addCell = function(row = 1, col = 1) {
+        if (this.getCell(row, col)) {
+            return;
+        }
+
         this.getRow(row).appendChild(this.createCell(row, col));
     }
 
@@ -147,8 +170,14 @@ function Grid(args = {}) {
             row = this.rowCount;
         }
 
+        // Remove the row.
         this.element.removeChild(this.getRow(row));
         this.rowCount--;
+
+        // If there are no columns, set the row count to zero.
+        if (this.rowCount === 0) {
+            this.colCount = 0;
+        }
     }
 
     this.removeCol = function(col = -1) {
@@ -168,6 +197,11 @@ function Grid(args = {}) {
         }
 
         this.colCount--;
+
+        // If there are no columns, set the row count to zero.
+        if (this.colCount === 0) {
+            this.rowCount = 0;
+        }
     }
 
     this.fillCells = function(type = 'all') {
@@ -199,7 +233,7 @@ function Grid(args = {}) {
 
 }
 
-const grid = new Grid({
+const grid = new GridMaker({
     element: '#grid',
     buttons: '#buttons',
     colCount: 0,
